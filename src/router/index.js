@@ -14,7 +14,7 @@ const routes = [
     props: (route) => ({ page: parseInt(route.query.page) || 1 }),
   },
   {
-    path: '/event/:id',
+    path: '/events/:id',
     name: 'EventLayout',
     props: true,
     component: EventLayout,
@@ -37,9 +37,32 @@ const routes = [
     ],
   },
   {
-    path: '/about',
+    path: '/event/:afterEvent(.*)',
+    redirect: (to) => ({ path: '/events/' + to.params.afterEvent }),
+
+    /* fix for nested routes (Method #2)
+      children: [
+        { path: 'register', redirect: () => ({ name: 'EventRegister' }) },
+        { path: 'edit', redirect: () => ({ name: 'EventEdit' }) },
+      ],
+    */
+  },
+  {
+    path: '/about-us',
     name: 'about',
     component: AboutView,
+    // alias: '/about' // Note: Not suitable for SEO
+  },
+  {
+    path: '/about',
+    // redirect: { name: 'about' }, // Simple expression
+
+    /* Complex expressions
+      1. redirect: () => ({ name: 'about' })
+      2. redirect: () => {
+        return { name: 'about' }
+      }
+    */
   },
 ]
 
