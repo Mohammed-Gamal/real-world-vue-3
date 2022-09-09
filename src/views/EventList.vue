@@ -57,12 +57,7 @@ export default {
           this.totalEvents = response.headers['x-total-count']
         })
         .catch((error) => {
-          console.error(error)
-
-          this.$router.push({
-            name: '404Resource',
-            params: { resource: 'event' },
-          })
+          console.log(error)
         })
     })
   },

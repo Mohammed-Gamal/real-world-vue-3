@@ -56,7 +56,7 @@ const routes = [
   },
   {
     path: '/about',
-    // redirect: { name: 'about' }, // Simple expression
+    redirect: { name: 'about' }, // Simple expression
 
     /* Complex expressions
       1. redirect: () => ({ name: 'about' })
