@@ -3,7 +3,7 @@ import axios from 'axios'
 const apiClient = axios.create({
   baseURL:
     'https://my-json-server.typicode.com/Mohammed-Gamal/real-world-vue-3',
-  withCredtials: false,
+  withCredentials: false,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -11,10 +11,10 @@ const apiClient = axios.create({
 })
 
 export default {
-  getEvents(perPage, page) {
-    return apiClient.get(`/events?_limit=${perPage}&_page=${page}`)
+  getEvents() {
+    return apiClient.get('/events')
   },
   getEvent(id) {
-    return apiClient.get(`/events/${id}`)
+    return apiClient.get('/events/' + id)
   },
 }
