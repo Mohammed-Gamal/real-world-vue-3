@@ -6,6 +6,7 @@ export default createStore({
     user: 'Mohamed Gamal',
     events: [],
     event: {},
+    totalEvents: 0,
   },
   mutations: {
     ADD_EVENT(state, event) {
@@ -16,6 +17,9 @@ export default createStore({
     },
     SET_EVENT(state, event) {
       state.event = event
+    },
+    TOTAL_EVENTS(state, total) {
+      state.totalEvents = total
     },
   },
   actions: {
@@ -30,10 +34,11 @@ export default createStore({
         })
     },
 
-    fetchEvents({ commit }) {
-      return EventService.getEvents()
+    fetchEvents({ commit }, { perPage, page }) {
+      return EventService.getEvents(perPage, page)
         .then((response) => {
           commit('SET_EVENTS', response.data)
+          commit('TOTAL_EVENTS', response.headers['x-total-count'])
         })
         .catch((error) => {
           throw error
